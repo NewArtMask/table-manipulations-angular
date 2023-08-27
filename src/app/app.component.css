@@ -1,0 +1,35 @@
+.table {
+  border: solid 1px;
+  margin-top: 1rem;
+}
+
+.table tr {
+  display: grid;
+  grid-template-columns: 2em repeat(4, 1fr);
+}
+
+.table td,
+.table th {
+  border: solid 1px;
+}
+
+.paginator {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  .page {
+    cursor: pointer;
+  }
+
+  .page:hover {
+    font-weight: 500;
+  }
+
+  .active {
+    font-weight: bolder;
+  }
+}

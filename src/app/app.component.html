@@ -12,6 +12,51 @@
 </style>
 
 <div class="content" role="main">
-  <h1>Welcome to {{title}}!</h1>
-  <h2>Start editing to see some magic happen</h2>
+  <input 
+    type="text" 
+    list="autocomplete"
+    class="search" 
+    placeholder="search..." 
+    [(ngModel)]="searchData"
+    (ngModelChange)="getPrediction()"
+    (change)="filterTable()"
+  >
+
+  <datalist id="autocomplete">
+    <option *ngFor="let predication of predications" value="{{predication}}">
+  </datalist>
+  
+  <p>Sort Order: {{sortOrder}}</p>
+  <p>Active Column: {{activeSortColumn | capitalizeFirst}}</p>
+
+  <table class='table'>
+    <div>
+      <tr>
+        <th>#</th>
+        <th [style.cursor]="'pointer'" (click)="sortData('name')">Name</th>
+        <th [style.cursor]="'pointer'" (click)="sortData('company')">Company</th>
+        <th [style.cursor]="'pointer'" (click)="sortData('contact')">Contact</th>
+        <th [style.cursor]="'pointer'" (click)="sortData('country')">Country</th>
+      </tr>
+    </div>
+    <div *ngFor="let client of content; let i = index">
+      <tr>
+        <td>{{i + 1}}</td>
+        <td>{{client.name}}</td>
+        <td>{{client.company}}</td>
+        <td>{{client.contact}}</td>
+        <td>{{client.country}}</td>
+      </tr>
+    </div>
+  </table>
+
+  <div class="paginator">
+    <div 
+      *ngFor="let page of pageAmount | toArray" 
+      class="page" [class.active]="page === currentPage"
+      (click)="getPage(page)"
+    >
+      {{page}}
+    </div>
+  </div>
 </div>
